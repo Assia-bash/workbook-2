@@ -1,11 +1,16 @@
 package com.pluarslight;
 
 public class ForLoop {
+
     public static void main(String[] args) throws InterruptedException {
-        for (int i = 10; i >= 1; i--) {
-            System.out.println(i);
-            Thread.sleep(1000); // pause for 1 second
+
+        // creating a for loop
+        // number starting at 10, going down by 1 number to reach 0
+        for(int num1 = 10; num1 > 0; num1--) {
+            System.out.println(num1);
         }
+
         System.out.println("Launch!");
+
     }
 }
