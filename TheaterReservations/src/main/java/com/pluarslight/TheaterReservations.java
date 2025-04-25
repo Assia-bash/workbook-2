@@ -1,42 +1,56 @@
-package com.pluarslight;
+package com.pluralsight;
 
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class TheaterReservations {
     public static void main(String[] args) {
-        Scanner input = new  Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
+        // Get full name
+        System.out.print("Please enter your name: ");
+        String fullName = scanner.nextLine().trim();
 
-        System.out.println("Full Name:");
-        String FullName = input.nextLine();
+        // Split into first and last name
+        String[] nameParts = fullName.split("\\s+");
+        if (nameParts.length < 2) {
+            System.out.println("Please enter both first and last name.");
+            return;
+        }
+        String firstName = nameParts[0];
+        String lastName = nameParts[1];
 
-        System.out.println("Full Date:");
-        String dateInput = input.nextLine();
-        LocalDate date = LocalDate.parse(dateInput);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // Get date
+        System.out.print("What date will you be coming (MM/dd/yyyy): ");
+        String inputDate = scanner.nextLine().trim();
+        LocalDate reservationDate;
+        try {
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            reservationDate = LocalDate.parse(inputDate, inputFormatter);
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please use MM/dd/yyyy.");
+            return;
+        }
 
-        System.out.println("Number of tickets:");
-        int tickets = input.nextInt();
+        // Get number of tickets
+        System.out.print("How many tickets would you like? ");
+        int ticketCount = scanner.nextInt();
+        scanner.nextLine(); // consume newline
 
-        String[] names = FullName.split(" ");
-        String firstName = names[0];
-        String lastName = names.length > 1 ? names[1] : "";
-
-        String ticketWord = tickets == 1 ? "ticket" : "tickets";
-
-        System.out.println(tickets + " " + ticketWord +
-                " reserved for " + date + " under " + lastName +
-                ", " + firstName);
+        // Confirmation message
+        String ticketWord = (ticketCount == 1) ? "ticket" : "tickets";
+        System.out.println(ticketCount + " " + ticketWord + " reserved for " +
+                reservationDate + " under " + lastName + ", " + firstName);
     }
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
